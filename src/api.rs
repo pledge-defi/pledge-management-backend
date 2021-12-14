@@ -1,9 +1,10 @@
-use actix_web::{web, HttpResponse, Responder};
+use actix_web::{web, Responder, HttpResponse};
+use crate::service::user as ServiceUser;
+use crate::model::user as ModelUser;
 
-pub async fn login(_req: web::Json<String>) ->  impl Responder {
-    // match ServiceEntry::login(req.into_inner()).await { 
-    //     Ok(res) => Ok(HttpResponse::Ok().json(ResponseBody::new(SUCCESS, MESSAGE_LOGIN_SUCCESS, res))),
-    //     Err(err) => Ok(err.response()),
-    // }
-    web::Bytes::from_static(b"Hello world!")
+pub async fn login(req: web::Json<ModelUser::LoginRequest>) -> impl Responder {
+    match ServiceUser::login(req.into_inner()).await { 
+        Ok(res) => HttpResponse::Ok().body(serde_json::to_string(&res).unwrap()),
+        Err(_) => HttpResponse::Ok().body("Login Failed"),
+    }
 }

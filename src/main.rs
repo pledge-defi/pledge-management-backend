@@ -1,7 +1,18 @@
+#[macro_use]
+extern crate diesel;
+#[macro_use]
+extern crate lazy_static;
+#[macro_use]
+extern crate serde_derive;
+
+extern crate chrono;
+
 mod model;
+mod schema;
 mod service;
 mod api;
 mod config;
+mod constants;
 
 use std::env;
 use actix_web::{App, HttpServer};

@@ -11,9 +11,6 @@ pub fn config_services(cfg: &mut web::ServiceConfig) {
             web::resource("/logout").route(web::post().to(login))
         )
         .service(
-            web::resource("/createpool").route(web::post().to(login))
-        )
-        .service(
             web::resource("/search").route(web::post().to(login))
         )
     );
