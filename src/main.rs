@@ -13,6 +13,7 @@ mod service;
 mod api;
 mod config;
 mod constants;
+mod contract;
 
 use std::env;
 use actix_web::{App, HttpServer};

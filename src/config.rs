@@ -1,5 +1,5 @@
 use actix_web::web;
-use crate::api::{login};
+use crate::api::{login, search};
 
 pub fn config_services(cfg: &mut web::ServiceConfig) { 
     cfg.service(
@@ -11,7 +11,7 @@ pub fn config_services(cfg: &mut web::ServiceConfig) {
             web::resource("/logout").route(web::post().to(login))
         )
         .service(
-            web::resource("/search").route(web::post().to(login))
+            web::resource("/search").route(web::get().to(search))
         )
     );
 }
