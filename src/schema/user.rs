@@ -9,7 +9,7 @@ table! {
 #[derive(Queryable, QueryableByName, Insertable, Serialize, Deserialize, Debug)]
 #[table_name = "admin"]
 pub struct Admin {
-    pub user_id : i32,
-    pub name    : String,
+    pub user_id: i32,
+    pub name: String,
     pub password: String,
 }

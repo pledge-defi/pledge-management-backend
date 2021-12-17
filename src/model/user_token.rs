@@ -1,14 +1,7 @@
 use crate::model::user;
 use chrono::Utc;
-use jsonwebtoken::{
-    EncodingKey,
-    DecodingKey,
-    Validation,
-    Algorithm,
-
-    Header
-};
-use serde::{Serialize, Deserialize};
+use jsonwebtoken::{Algorithm, DecodingKey, EncodingKey, Header, Validation};
+use serde::{Deserialize, Serialize};
 
 pub static KEY: [u8; 16] = *include_bytes!("../../secret.key");
 static ONE_WEEK: i64 = 60 * 60 * 24 * 7; // in seconds
@@ -25,7 +18,7 @@ pub struct UserToken {
 }
 
 impl UserToken {
-    pub async fn generate_token(login: &user::UserInfo) -> String { 
+    pub async fn generate_token(login: &user::UserInfo) -> String {
         let now = Utc::now().timestamp_nanos() / 1_000_000_000; // nanosecond -> second
         let payload = UserToken {
             iat: now,
@@ -33,13 +26,22 @@ impl UserToken {
             user: login.user_id,
         };
 
-        jsonwebtoken::encode(&Header::default(), &payload, &EncodingKey::from_secret(&KEY)).unwrap()
+        jsonwebtoken::encode(
+            &Header::default(),
+            &payload,
+            &EncodingKey::from_secret(&KEY),
+        )
+        .unwrap()
     }
 
     pub fn decode_token(token: &String) -> Result<UserToken, String> {
-        match jsonwebtoken::decode::<UserToken>(token, &DecodingKey::from_secret(&KEY), &Validation::new(Algorithm::HS256)) {
+        match jsonwebtoken::decode::<UserToken>(
+            token,
+            &DecodingKey::from_secret(&KEY),
+            &Validation::new(Algorithm::HS256),
+        ) {
             Ok(user_token) => Ok(user_token.claims),
-            Err(_) => Err("api-token 已过期或者错误".to_string()) 
+            Err(_) => Err("api-token 已过期或者错误".to_string()),
         }
     }
 }

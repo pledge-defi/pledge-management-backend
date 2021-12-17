@@ -7,16 +7,16 @@ extern crate serde_derive;
 
 extern crate chrono;
 
-mod model;
-mod schema;
-mod service;
 mod api;
 mod config;
 mod constants;
 mod contract;
+mod model;
+mod schema;
+mod service;
 
-use std::env;
 use actix_web::{App, HttpServer};
+use std::env;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
