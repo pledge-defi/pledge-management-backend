@@ -23,8 +23,7 @@ pub async fn login(
 
 pub async fn logout(logout_req: ModelUser::LogoutRequest) -> Result<String, StatusCode> {
     match ModelUser::logout(logout_req).await {
-        Ok(res)  =>  Ok(res),
-        Err(err) => Err(err)
+        Ok(res) => Ok(res),
+        Err(err) => Err(err),
     }
 }
-
