@@ -11,10 +11,10 @@ pub async fn login(req: web::Json<ModelUser::LoginRequest>) -> impl Responder {
     }
 }
 
-pub async fn search(req: web::Json<ModelPool::SearchRequest>) -> impl Responder {
-    // call contract.
-    match ServicePool::search(req.into_inner()).await {
-        Ok(res) => HttpResponse::Ok().body(serde_json::to_string(&res).unwrap()),
-        Err(_) => HttpResponse::Ok().body("seach pool Failed"),
-    }
+pub async fn logout(logout_req: web::Json<ModelUser::LogoutRequest>) -> impl Responder {
+    match ServiceUser::logout(logout_req.into_inner()).await {
+		Ok(res)  => HttpResponse::Ok().body(serde_json::to_string(&res).unwrap()),
+        Err(_) => HttpResponse::Ok().body("Logout Failed"),
+	}
 }
+

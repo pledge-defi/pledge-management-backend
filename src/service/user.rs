@@ -20,3 +20,11 @@ pub async fn login(
         Err(_err) => Err(StatusCode::INTERNAL_SERVER_ERROR),
     }
 }
+
+pub async fn logout(logout_req: ModelUser::LogoutRequest) -> Result<String, StatusCode> {
+    match ModelUser::logout(logout_req).await {
+        Ok(res)  =>  Ok(res),
+        Err(err) => Err(err)
+    }
+}
+

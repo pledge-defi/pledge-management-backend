@@ -38,6 +38,9 @@ pub async fn login(login_req: LoginRequest) -> Result<UserInfo, StatusCode> {
     {
         Ok(user_to_verify) => {
             println!("user to verify : {:?}", user_to_verify);
+            println!("login password: {}", login_req.password);
+            println!("verify password: {}", user_to_verify.password);
+            println!("verify result : {}", verify(&login_req.password, &user_to_verify.password).unwrap());
             if !user_to_verify.password.is_empty()
                 && verify(&login_req.password, &user_to_verify.password).unwrap()
             {
@@ -57,4 +60,16 @@ pub async fn login(login_req: LoginRequest) -> Result<UserInfo, StatusCode> {
             return Err(StatusCode::INTERNAL_SERVER_ERROR);
         }
     }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct LogoutRequest {
+    pub token       : String,
+    pub token_type  : String,
+}
+pub async fn logout(_logout_req: LogoutRequest) -> Result<String, StatusCode> {
+    // UserToken::disable_token(&logout_req.token);
+    // Err(ServiceError::new(StatusCode::INTERNAL_SERVER_ERROR, MESSAGE_LOGIN_FAILED.to_string()))
+
+    Ok("Logout".to_string())
 }
