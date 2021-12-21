@@ -10,7 +10,6 @@ extern crate chrono;
 mod api;
 mod config;
 mod constants;
-mod contract;
 mod model;
 mod schema;
 mod service;

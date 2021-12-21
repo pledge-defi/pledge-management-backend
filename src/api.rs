@@ -1,5 +1,5 @@
-use crate::model::{pool as ModelPool, user as ModelUser};
-use crate::service::{pool as ServicePool, user as ServiceUser};
+use crate::model::{user as ModelUser};
+use crate::service::{user as ServiceUser};
 use actix_web::{web, HttpResponse, Responder};
 
 pub async fn login(req: web::Json<ModelUser::LoginRequest>) -> impl Responder {
