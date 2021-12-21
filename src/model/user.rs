@@ -71,5 +71,5 @@ pub async fn logout(_logout_req: LogoutRequest) -> Result<String, StatusCode> {
     // UserToken::disable_token(&logout_req.token);
     // Err(ServiceError::new(StatusCode::INTERNAL_SERVER_ERROR, MESSAGE_LOGIN_FAILED.to_string()))
 
-    Ok("Logout".to_string())
+    Ok("Logout success".to_string())
 }
