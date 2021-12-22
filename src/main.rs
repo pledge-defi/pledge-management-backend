@@ -13,9 +13,11 @@ mod constants;
 mod model;
 mod schema;
 mod service;
+mod auth;
 
 use actix_web::{App, HttpServer};
 use std::env;
+use actix_web_httpauth::middleware::HttpAuthentication;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -27,8 +29,10 @@ async fn main() -> std::io::Result<()> {
     let app_url = format!("{}:{}", &app_host, &app_port);
     println!("url: {}", app_url);
 
+    let auth = HttpAuthentication::bearer(auth.bearer_auth_validator);
     HttpServer::new(|| {
         App::new()
+            .wrap(auth)
             .wrap(actix_web::middleware::Logger::default())
             .configure(config::config_services)
     })
