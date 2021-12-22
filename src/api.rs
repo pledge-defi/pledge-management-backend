@@ -34,8 +34,9 @@ pub async fn login(req: web::Json<ModelUser::LoginRequest>) -> impl Responder {
     }
 }
 
-pub async fn logout(logout_req: web::Json<ModelUser::LogoutRequest>) -> impl Responder {
-    match ServiceUser::logout(logout_req.into_inner()).await {
+//pub async fn logout(logout_req: web::Json<ModelUser::LogoutRequest>) -> impl Responder {
+pub async fn logout() -> impl Responder {
+    match ServiceUser::logout().await {
         Ok(_res) => {
             let body = json!({
                 "code": LOGIN_CODE_SUCCESS,

@@ -21,8 +21,9 @@ pub async fn login(
     }
 }
 
-pub async fn logout(logout_req: ModelUser::LogoutRequest) -> Result<String, StatusCode> {
-    match ModelUser::logout(logout_req).await {
+//pub async fn logout(logout_req: ModelUser::LogoutRequest) -> Result<String, StatusCode> {
+pub async fn logout() -> Result<String, StatusCode> {
+    match ModelUser::logout().await {
         Ok(res) => Ok(res),
         Err(err) => Err(err),
     }

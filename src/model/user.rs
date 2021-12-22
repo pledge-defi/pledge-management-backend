@@ -70,7 +70,8 @@ pub struct LogoutRequest {
     pub token_id: String,
     // pub token_type: String,
 }
-pub async fn logout(_logout_req: LogoutRequest) -> Result<String, StatusCode> {
+//pub async fn logout(_logout_req: LogoutRequest) -> Result<String, StatusCode> {
+pub async fn logout() -> Result<String, StatusCode> {
     // UserToken::disable_token(&logout_req.token);
     // Err(ServiceError::new(StatusCode::INTERNAL_SERVER_ERROR, MESSAGE_LOGIN_FAILED.to_string()))
 
