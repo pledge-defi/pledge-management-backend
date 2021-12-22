@@ -14,7 +14,7 @@ pub async fn login(
                 json!({ "token": UserToken::generate_token(&logged_user).await, "token_type": "api_key", "user": logged_user }),
             ) {
                 Ok(res) => Ok(res),
-                Err(e) => Err(StatusCode::INTERNAL_SERVER_ERROR),
+                Err(_e) => Err(StatusCode::INTERNAL_SERVER_ERROR),
             }
         }
         Err(_err) => Err(StatusCode::INTERNAL_SERVER_ERROR),

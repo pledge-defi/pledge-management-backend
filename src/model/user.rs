@@ -67,8 +67,8 @@ pub async fn login(login_req: LoginRequest) -> Result<UserInfo, StatusCode> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LogoutRequest {
-    pub token: String,
-    pub token_type: String,
+    pub token_id: String,
+    // pub token_type: String,
 }
 pub async fn logout(_logout_req: LogoutRequest) -> Result<String, StatusCode> {
     // UserToken::disable_token(&logout_req.token);
